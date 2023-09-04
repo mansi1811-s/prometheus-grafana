@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            S3 bucket - {{ bucket_name}}
+        </title>
+    </head>
+    <body>
+        
+
+        <br>
+        <table style="width:100%">
+           
+          <tr>
+            <h2> Lis of objects  </h2>
+
+           {% for obj in obj %}
+           <li> 
+            {{obj}}
+           
+           </li>
+            {% endfor %}
+          </tr>
+        </table>
+
+          
+    </body>
+</html>

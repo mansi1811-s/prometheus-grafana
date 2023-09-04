@@ -1,0 +1,33 @@
+version: '3'
+
+networks:
+  monitor-net:
+     driver: bridge
+
+services:
+  python-app:
+    image: mansi1811s/prom-app:1.0
+    ports:
+      - "5001:5001"
+    networks:
+      - monitor-net
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    networks:
+      - monitor-net
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=1234
+    networks:
+      - monitor-net
+    depends_on:
+      - prometheus
+
